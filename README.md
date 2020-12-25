@@ -16,6 +16,7 @@ Thanks to Adrian Rosebrock (from [pyimagesearch](https://www.pyimagesearch.com/)
 The detection is performed based on the color of the ball. Indeed, the detection algorithm detects the green color. I use the center of detected ball for computing the error and command the servo motor to put the ball at the center of the picture. 
 
 ## Localization
-The localization is performed based on a geometrical method, depicted in the following figure. ![figure2](https://dl.dropboxusercontent.com/s/gjm7fwh04z4h4uq/CameraCoordinate.png?dl=0)
+The localization is performed based on a geometrical method, depicted in the following figure. ![figure2](https://dl.dropboxusercontent.com/s/g6dgh6saj3pjp15/CameraCoordinate01.png?dl=0)
+![figure3](https://dl.dropboxusercontent.com/s/tblysaoj9mwq775/Equation.JPG?dl=0)
 
 
