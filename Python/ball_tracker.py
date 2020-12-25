@@ -13,10 +13,15 @@ import serial
 #Global Variables
 ser=0
 EOP=0XE7
-servoH=90
-servoW=90
+servoY=90
+servoX=80
 integralX=0
 integralY=0
+
+deltaAngleX=90
+deltaAngleY=0
+calibratedFlag=0
+h=60
 
 def updateServos(servo1,servo2):
     if(servo1>180):
@@ -56,7 +61,9 @@ def init_serial():
 
 
 init_serial()
-updateServos(servoH,servoW)
+updateServos(servoY,servoX)
+updateServos(servoY,servoX)
+updateServos(servoY,servoX)
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -144,46 +151,61 @@ while True:
             cv2.circle(frame, (int(x), int(y)), int(radius),
                 (0, 255, 255), 2)
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
-            tmp='X:'+str(int(x))+'   Y:'+str(int(y))
+            tmp='Xc:'+str(int(x))+'   Yc:'+str(int(y))+'    (pixel)'
             cv2.putText(frame,tmp,(50,50),cv2.FONT_HERSHEY_COMPLEX,
                                     1,(0,255,0),2, cv2.LINE_AA)
             #Save The Data Points
             Data_Points.loc[Data_Points.size/3] = [x , y, current_time]
 
 ##            if x>cam_width/2 :
-##                servoW+=1
+##                servoX+=1
 ##            elif x<cam_width/2:
-##                servoW-=1
+##                servoX-=1
 
 ##            errorX=cam_width/2-x;
-##            servoW=int(-errorX/25+90)
+##            servoX=int(-errorX/25+90)
 
             errorX=(cam_width/2-x);
             integralX+=errorX
-            servoW=int(errorX/40+integralX/100+90)
+            servoX=int(errorX/40+integralX/100+90)
             
 ##            print('errorY='+str(errorY))
 ##            print('integralY='+str(integralY))
-            print('ServoW='+str(servoW))
+            print('servoX='+str(servoX))
 
             errorY=-(cam_height/2-y);
             integralY+=errorY
-            servoH=int(errorY/40+integralY/100+90)
+            servoY=int(errorY/40+integralY/100+90)
+
+            if calibratedFlag==1:
+                beta=90-(servoY-deltaAngleY)
+                d=h*np.tan(np.deg2rad(beta))
+                alpha=-(servoX-deltaAngleX)
+                xt=d*np.cos(np.deg2rad(alpha))
+                yt=d*np.sin(np.deg2rad(alpha))
+##                print('beta= '+str(alpha))
+                #print('Xt= '+str(xt)+'Yt= '+str(yt))
+                tmp='Xt:'+str(int(xt))+'   Yt:'+str(int(yt))+'    (cm)'
+                cv2.putText(frame,tmp,(50,100),cv2.FONT_HERSHEY_COMPLEX,
+                                    1,(0,255,0),2, cv2.LINE_AA)
+                
+
+            
             
 ##            print('errorY='+str(errorY))
 ##            print('integralY='+str(integralY))
-            print('ServoH='+str(servoH))
+            print('servoY='+str(servoY))
             
-            updateServos(servoW,servoH)
+            updateServos(servoX,servoY)
 ##            if x-cam_width>10 :
-##                servoW-=1
+##                servoX-=1
 ##            elif (x-cam_width<-10):
-##                servoW+=1
+##                servoX+=1
                 
 ##            if (y-cam_height>10):
-##                servoH-=1
+##                servoY-=1
 ##            elif (y-cam_height<-10):
-##                servoH+=1
+##                servoY+=1
 
                 
         
@@ -210,6 +232,11 @@ while True:
     # if the 'q' key is pressed, stop the loop
     if key == ord("q"):
         break
+    elif key==ord("c"):
+        deltaAngleX=servoX
+        deltaAngleY=servoY
+        calibratedFlag=1
+        print('Calibrated...')
 
 #'h' is the focal length of the camera
 #'X0' is the correction term of shifting of x-axis
