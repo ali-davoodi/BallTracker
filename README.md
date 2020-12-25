@@ -17,10 +17,11 @@ The detection is performed based on the color of the ball. Indeed, the detection
 
 ## Localization
 The localization is performed based on a geometrical method, depicted in the following figure. ![figure2](https://dl.dropboxusercontent.com/s/g6dgh6saj3pjp15/CameraCoordinate01.png?dl=0)
+
 <img align="center" width="292" height="224" src="https://dl.dropboxusercontent.com/s/tblysaoj9mwq775/Equation.JPG?dl=0">
 
 ## Results
 The output of Python applicaion is shown in following figure.
-![figure_Result}(https://dl.dropboxusercontent.com/s/mwohe7z5bbnxhu6/Result01.jpg?dl=0)
+![figure_Result](https://dl.dropboxusercontent.com/s/mwohe7z5bbnxhu6/Result01.jpg?dl=0)
 
 
