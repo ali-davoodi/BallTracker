@@ -6,7 +6,7 @@ In this project, I implemented a vision-based tracker and localizer using a 2-DO
 
 
 ## Hardware
-In this project, a 640x480 USB camera is installed on a 2-DOF platform running by two low-cost servo motors (MG90s), a USB UART converter, and an Arduino UNO command the servo motors. The hardware setup is shown at following figure. ![figure1](https://www.dropbox.com/s/i4892fcb4uv8966/Hardware02.jpg)
+In this project, a 640x480 USB camera is installed on a 2-DOF platform running by two low-cost servo motors (MG90s), a USB UART converter, and an Arduino UNO command the servo motors. The hardware setup is shown at following figure. ![figure1](https://dl.dropboxusercontent.com/s/i4892fcb4uv8966/Hardware02.jpg?dl=0)
 
 ## Prerequisites
 For running this project you will need Arduino and python compiler with open-cv and numpy packages, alongside with the above-mentioned hardware.
