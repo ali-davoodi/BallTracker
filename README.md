@@ -1,89 +1,21 @@
-# Project Title
+# Ball Tracker and Localizer using 2-DOF Camera
 
-One Paragraph of project description goes here
+In this project, I implemented a vision-based tracker and localizer using a 2-DOF camera. A python application detect a green ball on screen and calculate its center in image coordination using open-cv library. Then, a 2-DOF platform with two servo motors run by Arduino UNO tries to put the center of the ball at the center of the screen. After that, a geometry-based localization method calculates the localization of the ball.
 
-## Getting Started
+##Acknowledgement
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Hardware
+In this project, a 640x480 USB camera is installed on a 2-DOF platform running by two low-cost servo motors (MG90s), a USB UART converter, and an Arduino UNO command the servo motors. The hardware setup is shown at following figure. ![figure1](https://www.dropbox.com/s/i4892fcb4uv8966/Hardware02.jpg?dl=0)
 
-What things you need to install the software and how to install them
+## Prerequisites
+For running this project you will need Arduino and python compiler with open-cv and numpy packages, alongside with the above-mentioned hardware.
 
-```
-Give examples
-```
+## Detection
+Thanks to Adrian Rosebrock (from [pyimagesearch](https://www.pyimagesearch.com/)) and [Practical-CV](https://github.com/Practical-CV/Color-Based-Ball-Tracking-With-OpenCV) for tutorials and detection code.
+The detection is performed based on the color of the ball. Indeed, the detection algorithm detects the green color. I use the center of detected ball for computing the error and command the servo motor to put the ball at the center of the picture. 
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+## Localization
+The localization is performed based on a geometrical method, depicted in the following figure. ![figure2](https://www.dropbox.com/s/gjm7fwh04z4h4uq/CameraCoordinate.png?dl=0)
 
 
